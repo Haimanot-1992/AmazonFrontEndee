@@ -1,190 +1,269 @@
-import React, { useContext, useState } from "react";
-import {
-  Search,
-  ShoppingCart,
-  MapPin,
-  Menu,
-  X,
-  ChevronDown,
-} from "lucide-react";
-import { Link } from "react-router-dom";
 import styles from "./Header.module.css";
+import { BiCart } from "react-icons/bi";
+import LowerHeader from "./LowerHeader";
+import { BsSearch } from "react-icons/bs";
+import { SlLocationPin } from "react-icons/sl";
+import React, { useContext, useState } from "react";
+import { Link } from "react-router-dom";
 import { DataContext } from "../DataProvider/DataProvider";
 
-const Header = () => {
+function Header() {
   const [{ basket }, dispatch] = useContext(DataContext);
-  console.log(basket.length);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
-
-  const categories = [
-    "All",
-    "Electronics",
-    "Computers",
-    "Smart Home",
-    "Arts & Crafts",
-    "Automotive",
-    "Baby",
-    "Beauty",
-    "Books",
-    "Women's Fashion",
-    "Men's Fashion",
-    "Health & Household",
-  ];
-
-  const handleSearch = (e) => {
-    e.preventDefault();
-    if (searchQuery.trim()) {
-      console.log("Searching:", searchQuery);
-    }
-  };
-
+  // console.log(basket.length);
   return (
     <>
-      <section className={styles.fixed}>
-        {/* Top Navigation */}
-        <div className={styles.headerTop}>
-          <div className={styles.headerTopContainer}>
-            <div className={styles.headerTopLeft}>
-              <Link to="/" className={styles.headerLink}>
-                <div className={styles.logo}>
-                  <span className={styles.logoText}>amazon</span>
-                </div>
-              </Link>
-              <div className={styles.headerLocation}>
-                <MapPin size={18} />
-                <div className={styles.locationText}>
-                  <span className={styles.deliverTo}>Deliver to</span>
-                  <span className={styles.country}>Ethiopia</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Search Bar */}
-            <form className={styles.headerSearch} onSubmit={handleSearch}>
-              <select className={styles.searchSelect}>
-                {categories.map((cat) => (
-                  <option key={cat} value={cat}>
-                    {cat}
-                  </option>
-                ))}
-              </select>
-              <input
-                type="text"
-                className={styles.searchInput}
-                placeholder="Search Amazon"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+      <section>
+        <div className={styles.header_container}>
+          <div className={styles.logo_container}>
+            {/* logo  */}
+            <Link to="/">
+              <img
+                src="https://pngimg.com/uploads/amazon/amazon_PNG11.png"
+                alt="amazon logo"
               />
-              <button type="submit" className={styles.searchButton}>
-                <Search size={20} />
-              </button>
-            </form>
-
-            {/* Right Navigation */}
-            <div className={styles.headerRight}>
-              <div className={styles.order_container}>
-                <Link to="" className={styles.language}>
-                  <img
-                    src="https://www.shutterstock.com/shutterstock/photos/2376156903/display_1500/stock-photo-american-usa-flag-beautifully-waving-wave-american-flag-national-pride-of-united-states-america-2376156903.jpg"
-                    alt=""
-                  />
-                  <select name="" id="">
-                    <option value="">EN</option>
-                  </select>
-                </Link>
-              </div>
-              <Link to="/signup">
-                <div className={styles.headerAccount}>
-                  <span className={styles.accountLine1}>Signin</span>
-                  <span className={styles.accountLine2}>
-                    Account & Lists <ChevronDown size={12} />
-                  </span>
-                </div>
-              </Link>
-
-              <Link to="/order">
-                <div className={styles.headerOrders}>
-                  <span className={styles.ordersLine1}>Returns</span>
-                  <span className={styles.ordersLine2}>& Orders</span>
-                </div>
-              </Link>
-              <Link to="/cart" className={styles.headerCart}>
-                <div className={styles.cartIcon}>
-                  <ShoppingCart size={32} />
-                  <span className={styles.cartCount}>{basket.length}</span>
-                </div>
-                <span className={styles.cartText}>Cart</span>
-              </Link>
-            </div>
-
-            {/* Mobile Menu Button */}
-            <button
-              className={styles.mobileMenuButton}
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-            >
-              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
-          </div>
-        </div>
-
-        {/* Categories Bar */}
-        <div className={styles.headerCategories}>
-          <div className={styles.categoriesContainer}>
-            <button className={styles.allCategories}>
-              <Menu size={20} />
-              <span>All</span>
-            </button>
-            <Link to="/" className={styles.categoryLink}>
-              Today's Deals
             </Link>
-            <Link to="/" className={styles.categoryLink}>
-              Customer Service
-            </Link>
-            <Link to="/" className={styles.categoryLink}>
-              Registry
-            </Link>
-            <Link to="/" className={styles.categoryLink}>
-              Gift Cards
-            </Link>
-            <Link to="/" className={styles.categoryLink}>
-              Sell
-            </Link>
-            {/* <Link to="/" className={styles.categoryLink}>
-            Electronics
-          </Link>
-          <Link to="/" className={styles.categoryLink}>
-            Fashion
-          </Link> */}
-          </div>
-        </div>
-
-        {/* Mobile Menu */}
-        {isMenuOpen && (
-          <div className={styles.mobileMenu}>
-            <div className={styles.mobileMenuContent}>
-              <div className={styles.mobileAccount}>
-                <span className={styles.mobileAccountTitle}>
-                  Hello, sign in
-                </span>
-                <span className={styles.mobileAccountSubtitle}>
-                  Account & Lists
-                </span>
-              </div>
-              <div className={styles.mobileCategories}>
-                <h3>Shop by Department</h3>
-                {categories.map((cat) => (
-                  <Link key={cat} to="/" className={styles.mobileCategory}>
-                    {cat}
-                  </Link>
-                ))}
+            {/* Delivery  */}
+            <div className={styles.delivery}>
+              <span>
+                <SlLocationPin />
+              </span>
+              <div>
+                <p>Delivery to </p>
+                <span>Ethiopia</span>
               </div>
             </div>
           </div>
-        )}
+          <div className={styles.search}>
+            {/* search  */}
+            <select name="" id="">
+              <option value="">All</option>
+            </select>
+            <input type="text" name="" id="" />
+            <BsSearch size={25} />
+          </div>
+          {/* rigit side link  */}
+          <div className={styles.order_container}>
+            <Link to="" className={styles.language}>
+              <img
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Flag_of_the_United_States_%28DDD-F-416E_specifications%29.svg/330px-Flag_of_the_United_States_%28DDD-F-416E_specifications%29.svg.png"
+                alt=""
+              />
+              <select>
+                <option value="">EN</option>
+              </select>
+            </Link>
+            {/* three components  */}
+            <Link to="/Signup">
+              <p>Sign In</p>
+              <span>Account & List</span>
+            </Link>
+            {/* orders  */}
+            <Link to="/order">
+              <p>returns</p>
+              <span>& Orders</span>
+            </Link>
+            {/* cart  */}
+            <Link to="/cart" className={styles.cart}>
+              <BiCart size={35} />
+              <span>{basket.length}</span>
+            </Link>
+          </div>
+        </div>
       </section>
+      <LowerHeader />
     </>
   );
-};
+}
 
 export default Header;
+
+// import React, { useContext, useState } from "react";
+// import {
+//   Search,
+//   ShoppingCart,
+//   MapPin,
+//   Menu,
+//   X,
+//   ChevronDown,
+// } from "lucide-react";
+// import { Link } from "react-router-dom";
+// import styles from "./Header.module.css";
+// import { DataContext } from "../DataProvider/DataProvider";
+
+// const Header = () => {
+//   const [{ basket }, dispatch] = useContext(DataContext);
+//   console.log(basket.length);
+//   const [isMenuOpen, setIsMenuOpen] = useState(false);
+//   const [searchQuery, setSearchQuery] = useState("");
+
+//   const categories = [
+//     "All",
+//     "Electronics",
+//     "Computers",
+//     "Smart Home",
+//     "Arts & Crafts",
+//     "Automotive",
+//     "Baby",
+//     "Beauty",
+//     "Books",
+//     "Women's Fashion",
+//     "Men's Fashion",
+//     "Health & Household",
+//   ];
+
+//   const handleSearch = (e) => {
+//     e.preventDefault();
+//     if (searchQuery.trim()) {
+//       console.log("Searching:", searchQuery);
+//     }
+//   };
+
+//   return (
+//     <>
+//       <section className={styles.fixed}>
+//         {/* Top Navigation */}
+//         <div className={styles.headerTop}>
+//           <div className={styles.headerTopContainer}>
+//             <div className={styles.headerTopLeft}>
+//               <Link to="/" className={styles.headerLink}>
+//                 <div className={styles.logo}>
+//                   <span className={styles.logoText}>amazon</span>
+//                 </div>
+//               </Link>
+//               <div className={styles.headerLocation}>
+//                 <MapPin size={18} />
+//                 <div className={styles.locationText}>
+//                   <span className={styles.deliverTo}>Deliver to</span>
+//                   <span className={styles.country}>Ethiopia</span>
+//                 </div>
+//               </div>
+//             </div>
+
+//             {/* Search Bar */}
+//             <form className={styles.headerSearch} onSubmit={handleSearch}>
+//               <select className={styles.searchSelect}>
+//                 {categories.map((cat) => (
+//                   <option key={cat} value={cat}>
+//                     {cat}
+//                   </option>
+//                 ))}
+//               </select>
+//               <input
+//                 type="text"
+//                 className={styles.searchInput}
+//                 placeholder="Search Amazon"
+//                 value={searchQuery}
+//                 onChange={(e) => setSearchQuery(e.target.value)}
+//               />
+//               <button type="submit" className={styles.searchButton}>
+//                 <Search size={20} />
+//               </button>
+//             </form>
+
+//             {/* Right Navigation */}
+//             <div className={styles.headerRight}>
+//               <div className={styles.order_container}>
+//                 <Link to="" className={styles.language}>
+//                   <img
+//                     src="https://www.shutterstock.com/shutterstock/photos/2376156903/display_1500/stock-photo-american-usa-flag-beautifully-waving-wave-american-flag-national-pride-of-united-states-america-2376156903.jpg"
+//                     alt=""
+//                   />
+//                   <select name="" id="">
+//                     <option value="">EN</option>
+//                   </select>
+//                 </Link>
+//               </div>
+//               <Link to="/signup">
+//                 <div className={styles.headerAccount}>
+//                   <span className={styles.accountLine1}>Signin</span>
+//                   <span className={styles.accountLine2}>
+//                     Account & Lists <ChevronDown size={12} />
+//                   </span>
+//                 </div>
+//               </Link>
+
+//               <Link to="/order">
+//                 <div className={styles.headerOrders}>
+//                   <span className={styles.ordersLine1}>Returns</span>
+//                   <span className={styles.ordersLine2}>& Orders</span>
+//                 </div>
+//               </Link>
+//               <Link to="/cart" className={styles.headerCart}>
+//                 <div className={styles.cartIcon}>
+//                   <ShoppingCart size={32} />
+//                   <span className={styles.cartCount}>{basket.length}</span>
+//                 </div>
+//                 <span className={styles.cartText}>Cart</span>
+//               </Link>
+//             </div>
+
+//             {/* Mobile Menu Button */}
+//             <button
+//               className={styles.mobileMenuButton}
+//               onClick={() => setIsMenuOpen(!isMenuOpen)}
+//             >
+//               {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+//             </button>
+//           </div>
+//         </div>
+
+//         {/* Categories Bar */}
+//         <div className={styles.headerCategories}>
+//           <div className={styles.categoriesContainer}>
+//             <button className={styles.allCategories}>
+//               <Menu size={20} />
+//               <span>All</span>
+//             </button>
+//             <Link to="/" className={styles.categoryLink}>
+//               Today's Deals
+//             </Link>
+//             <Link to="/" className={styles.categoryLink}>
+//               Customer Service
+//             </Link>
+//             <Link to="/" className={styles.categoryLink}>
+//               Registry
+//             </Link>
+//             <Link to="/" className={styles.categoryLink}>
+//               Gift Cards
+//             </Link>
+//             <Link to="/" className={styles.categoryLink}>
+//               Sell
+//             </Link>
+//             {/* <Link to="/" className={styles.categoryLink}>
+//             Electronics
+//           </Link>
+//           <Link to="/" className={styles.categoryLink}>
+//             Fashion
+//           </Link> */}
+//           </div>
+//         </div>
+
+//         {/* Mobile Menu */}
+//         {isMenuOpen && (
+//           <div className={styles.mobileMenu}>
+//             <div className={styles.mobileMenuContent}>
+//               <div className={styles.mobileAccount}>
+//                 <span className={styles.mobileAccountTitle}>
+//                   Hello, sign in
+//                 </span>
+//                 <span className={styles.mobileAccountSubtitle}>
+//                   Account & Lists
+//                 </span>
+//               </div>
+//               <div className={styles.mobileCategories}>
+//                 <h3>Shop by Department</h3>
+//                 {categories.map((cat) => (
+//                   <Link key={cat} to="/" className={styles.mobileCategory}>
+//                     {cat}
+//                   </Link>
+//                 ))}
+//               </div>
+//             </div>
+//           </div>
+//         )}
+//       </section>
+//     </>
+//   );
+// };
+
+// export default Header;
