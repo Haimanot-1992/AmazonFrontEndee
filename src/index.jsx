@@ -1,0 +1,13 @@
+import React, { StrictMode } from "react";
+import { initialState, reducer } from "./Utility/reducer";
+import ReactDOM from "react-dom/client";
+// import './index.css';
+import App from "./App";
+import { DataProvider } from "./components/DataProvider/DataProvider";
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(
+  <DataProvider reducer={reducer} initialState={initialState}>
+    <App />
+  </DataProvider>
+);
