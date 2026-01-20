@@ -1,6 +1,6 @@
 {
   "name": "AmazonFrontEnd",
-  "homepage": "https://{Haimanot-1992}.github.io/{AmazonFrontEndee}",
+  "index": "https://{Haimanot-1992}.github.io/{AmazonFrontEndee}",
   "predeploy": "npm run build",
   "deploy": "gh-pages -d build",
   "version": "0.1.0",
