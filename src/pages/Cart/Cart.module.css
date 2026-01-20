@@ -11,7 +11,7 @@
   padding: 20px;
 }
 .cart_container h2,
-.cart_containerh2 {
+.cart_container h2 {
   padding: 10px;
 }
 .cart_container hr {
@@ -54,7 +54,7 @@
   text-align: center;
   width: 100%;
   border: none;
-  /* background-color: var(--primary-color); */
+
   border-radius: 5px;
   padding: 5px 10px;
   text-decoration: none;

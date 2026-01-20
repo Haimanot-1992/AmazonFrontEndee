@@ -8,7 +8,7 @@
   width: 100%;
   height: 180px;
   background-image: linear-gradient(
-    to Button,
+    to top,
     rgb(255, 255, 255, 0),
     rgb(255, 255, 255)
   );
